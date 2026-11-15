@@ -1,0 +1,459 @@
+/*
+ * Tailwind v4 entry: config lives here, with no tailwind.config.js or PostCSS plugin.
+ * Keep every @import in this top block. Web fonts load via <link> in src/routes/__root.tsx.
+ */
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * THE STACKS — a night-time pixel library.
+ * Palette: mahogany, espresso, burgundy, forest, parchment, amber, antique gold.
+ * Everything is drawn on a 4px "pixel" grid (--px). No soft radii, no blur shadows.
+ */
+
+@theme inline {
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-espresso: var(--espresso);
+  --color-mahogany: var(--mahogany);
+  --color-burgundy: var(--burgundy);
+  --color-forest: var(--forest);
+  --color-parchment: var(--parchment);
+  --color-parchment-dark: var(--parchment-dark);
+  --color-amber: var(--amber);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-ink: var(--ink);
+  --color-ink-red: var(--ink-red);
+
+  --font-display: "Silkscreen", ui-monospace, monospace;
+  --font-pixel: "Pixelify Sans", ui-monospace, monospace;
+  --font-term: "VT323", ui-monospace, monospace;
+}
+
+:root {
+  --px: 4px;
+  --scene-h: max(100dvh, calc(100vw * 272 / 480));
+
+  --espresso: oklch(0.17 0.025 45);
+  --espresso-deep: oklch(0.11 0.018 40);
+  --mahogany: oklch(0.34 0.085 35);
+  --mahogany-light: oklch(0.44 0.095 42);
+  --mahogany-dark: oklch(0.25 0.065 32);
+  --burgundy: oklch(0.42 0.13 20);
+  --burgundy-light: oklch(0.52 0.15 24);
+  --burgundy-dark: oklch(0.28 0.09 18);
+  --forest: oklch(0.36 0.07 155);
+  --forest-dark: oklch(0.24 0.05 155);
+  --parchment: oklch(0.91 0.045 85);
+  --parchment-dark: oklch(0.8 0.06 78);
+  --parchment-line: oklch(0.78 0.04 230 / 0.55);
+  --amber: oklch(0.8 0.15 70);
+  --gold: oklch(0.72 0.12 82);
+  --gold-light: oklch(0.86 0.12 92);
+  --gold-dark: oklch(0.5 0.09 70);
+  --ink: oklch(0.22 0.035 40);
+  --ink-red: oklch(0.48 0.17 25);
+  --outline: oklch(0.09 0.015 40);
+  --glass: oklch(0.14 0.02 60);
+
+  --background: var(--espresso);
+  --foreground: var(--parchment);
+  --card: var(--parchment);
+  --card-foreground: var(--ink);
+  --popover: var(--parchment);
+  --popover-foreground: var(--ink);
+  --primary: var(--burgundy);
+  --primary-foreground: var(--gold-light);
+  --secondary: var(--forest);
+  --secondary-foreground: var(--parchment);
+  --muted: var(--mahogany-dark);
+  --muted-foreground: oklch(0.76 0.05 75);
+  --accent: var(--gold);
+  --accent-foreground: var(--ink);
+  --destructive: var(--ink-red);
+  --destructive-foreground: var(--parchment);
+  --border: var(--outline);
+  --input: var(--mahogany);
+  --ring: var(--amber);
+  --radius: 0px;
+
+  /* Hard, pixel-stepped corner clip (one pixel notch). */
+  --pixel-clip: polygon(
+    0 var(--px), var(--px) var(--px), var(--px) 0,
+    calc(100% - var(--px)) 0, calc(100% - var(--px)) var(--px), 100% var(--px),
+    100% calc(100% - var(--px)), calc(100% - var(--px)) calc(100% - var(--px)),
+    calc(100% - var(--px)) 100%, var(--px) 100%, var(--px) calc(100% - var(--px)),
+    0 calc(100% - var(--px))
+  );
+  --bevel: inset var(--px) var(--px) 0 oklch(1 0 0 / 0.14), inset calc(var(--px) * -1) calc(var(--px) * -1) 0 oklch(0 0 0 / 0.35);
+  --wood-grain: repeating-linear-gradient(
+    90deg,
+    var(--mahogany) 0 14px,
+    var(--mahogany-dark) 14px 16px,
+    var(--mahogany) 16px 30px,
+    var(--mahogany-light) 30px 32px,
+    var(--mahogany) 32px 44px,
+    var(--mahogany-dark) 44px 48px
+  );
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html, body { height: 100%; }
+  body {
+    background-color: var(--espresso-deep);
+    color: var(--color-foreground);
+    font-family: var(--font-term);
+    -webkit-font-smoothing: none;
+    font-smooth: never;
+  }
+  ::selection { background: var(--amber); color: var(--ink); }
+}
+
+@utility pixel-clip { clip-path: var(--pixel-clip); }
+@utility pixelated { image-rendering: pixelated; }
+@utility text-pixel-shadow { text-shadow: 0 var(--px) 0 var(--burgundy-dark), var(--px) var(--px) 0 var(--outline); }
+@utility text-ink-shadow { text-shadow: 2px 2px 0 oklch(0.6 0.06 70 / 0.35); }
+
+/* ───────────── scene ───────────── */
+@layer components {
+  .scene {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    height: var(--scene-h);
+    aspect-ratio: 480 / 272;
+    transform: translateX(-50%);
+  }
+  .scene-vignette {
+    background:
+      radial-gradient(ellipse 42% 46% at 50% 58%, oklch(0.08 0.02 40 / 0.55), transparent 70%),
+      radial-gradient(ellipse 80% 75% at 50% 55%, transparent 55%, oklch(0.06 0.01 40 / 0.85));
+  }
+  .lamp-glow {
+    position: absolute;
+    width: 9%;
+    aspect-ratio: 1;
+    translate: -50% -50%;
+    background: radial-gradient(circle, oklch(0.82 0.15 70 / 0.38), oklch(0.75 0.14 60 / 0.12) 40%, transparent 68%);
+    mix-blend-mode: screen;
+    animation: flicker 3.2s steps(1) infinite;
+  }
+  .moon-shaft {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, oklch(0.8 0.05 240 / 0.12), transparent 70%);
+    clip-path: polygon(51% 39%, 59% 39%, 72% 82%, 40% 82%);
+    mix-blend-mode: screen;
+  }
+
+  /* ───────────── machine ───────────── */
+  .machine {
+    position: relative;
+    width: 560px;
+    font-family: var(--font-display);
+  }
+  .machine-body {
+    position: relative;
+    background: var(--wood-grain);
+    border: var(--px) solid var(--outline);
+    box-shadow: var(--bevel);
+    clip-path: var(--pixel-clip);
+  }
+  .machine-crown {
+    position: relative;
+    margin: 0 auto;
+    width: 78%;
+    background: var(--wood-grain);
+    border: var(--px) solid var(--outline);
+    border-bottom: 0;
+    box-shadow: var(--bevel);
+    clip-path: polygon(0 100%, 0 calc(var(--px) * 3), calc(var(--px) * 3) 0, calc(100% - var(--px) * 3) 0, 100% calc(var(--px) * 3), 100% 100%);
+  }
+  .brass-plate {
+    background: linear-gradient(180deg, var(--gold-light) 0 var(--px), var(--gold) var(--px) calc(100% - var(--px)), var(--gold-dark) calc(100% - var(--px)));
+    border: var(--px) solid var(--outline);
+    color: var(--ink);
+    clip-path: var(--pixel-clip);
+  }
+  .brass-frame {
+    background: var(--gold);
+    border: var(--px) solid var(--outline);
+    box-shadow: inset var(--px) var(--px) 0 var(--gold-light), inset calc(var(--px) * -1) calc(var(--px) * -1) 0 var(--gold-dark);
+    clip-path: var(--pixel-clip);
+  }
+  .rivet {
+    width: 8px; height: 8px;
+    background: var(--gold-light);
+    box-shadow: 2px 2px 0 var(--gold-dark);
+  }
+  .reel-glass {
+    position: relative;
+    overflow: hidden;
+    background: var(--glass);
+    border: var(--px) solid var(--outline);
+    box-shadow: inset 0 calc(var(--px) * 2) 0 oklch(0 0 0 / 0.5);
+  }
+  .reel-glass::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg, oklch(0.05 0.01 40 / 0.55), transparent 18%, transparent 82%, oklch(0.05 0.01 40 / 0.55)),
+      linear-gradient(115deg, transparent 62%, oklch(1 0 0 / 0.06) 62% 66%, transparent 66% 70%, oklch(1 0 0 / 0.05) 70% 72%, transparent 72%);
+  }
+
+  .index-card {
+    position: relative;
+    background:
+      linear-gradient(180deg, transparent 0 34px, var(--ink-red) 34px 36px, transparent 36px),
+      repeating-linear-gradient(180deg, transparent 0 22px, var(--parchment-line) 22px 24px),
+      var(--parchment);
+    background-position: 0 0, 0 36px, 0 0;
+    color: var(--ink);
+    border: var(--px) solid var(--outline);
+    box-shadow: inset calc(var(--px) * -1) calc(var(--px) * -1) 0 var(--parchment-dark);
+    clip-path: var(--pixel-clip);
+  }
+  .index-card.is-spinning::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(180deg, oklch(0.22 0.035 40 / 0.07) 0 4px, transparent 4px 12px);
+    animation: streak 0.12s steps(3) infinite;
+    pointer-events: none;
+  }
+  .card-hole {
+    width: 12px; height: 12px;
+    background: var(--glass);
+    box-shadow: inset 2px 2px 0 oklch(0 0 0 / 0.6);
+  }
+  .stamp {
+    font-family: var(--font-display);
+    color: var(--ink-red);
+    border: 2px solid var(--ink-red);
+    padding: 0 6px;
+    rotate: -8deg;
+    opacity: 0.85;
+  }
+
+  .pixel-link {
+    font-family: var(--font-term);
+    color: var(--forest);
+    text-decoration: none;
+    border-bottom: 2px dotted currentColor;
+  }
+  .pixel-link:hover, .pixel-link:focus-visible { color: var(--ink-red); outline: none; }
+
+  .dial-arrow {
+    width: 28px; height: 28px;
+    display: grid; place-items: center;
+    background: var(--forest);
+    color: var(--gold-light);
+    border: var(--px) solid var(--outline);
+    box-shadow: var(--bevel);
+    clip-path: var(--pixel-clip);
+  }
+  .dial-arrow:hover { background: oklch(0.42 0.08 155); }
+  .dial-arrow:active { box-shadow: inset var(--px) var(--px) 0 oklch(0 0 0 / 0.35); }
+  .dial-arrow:disabled { opacity: 0.5; }
+
+  .drawer {
+    position: relative;
+    background: var(--wood-grain);
+    border: var(--px) solid var(--outline);
+    box-shadow: var(--bevel), inset 0 0 0 calc(var(--px) * 2) oklch(0 0 0 / 0.12);
+    clip-path: var(--pixel-clip);
+  }
+  .drawer-pull {
+    width: 28px; height: 12px;
+    border: var(--px) solid var(--gold);
+    border-top: 0;
+    box-shadow: 2px 2px 0 var(--gold-dark);
+  }
+  .drawer.is-rattling { animation: rattle 0.16s steps(2) infinite; }
+  .drawer.is-open { translate: 0 6px; transition: translate 0.18s steps(3); }
+
+  .bulb {
+    width: 16px; height: 16px;
+    background: var(--mahogany-dark);
+    border: var(--px) solid var(--outline);
+    box-shadow: inset 2px 2px 0 oklch(1 0 0 / 0.12);
+  }
+  .bulb.is-on {
+    background: var(--amber);
+    box-shadow: inset 2px 2px 0 var(--gold-light), 0 0 0 4px oklch(0.8 0.15 70 / 0.25), 0 0 0 8px oklch(0.8 0.15 70 / 0.1);
+  }
+
+  /* The big physical button. Housing shows the "side"; face drops on press. */
+  .pull-button {
+    position: relative;
+    display: block;
+    width: 100%;
+    padding-bottom: calc(var(--px) * 2);
+    background: var(--burgundy-dark);
+    border: var(--px) solid var(--outline);
+    clip-path: var(--pixel-clip);
+    cursor: pointer;
+    outline: none;
+  }
+  .pull-button__face {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    height: 56px;
+    background: var(--burgundy);
+    color: var(--gold-light);
+    font-family: var(--font-display);
+    font-size: 24px;
+    letter-spacing: 0.06em;
+    text-shadow: 0 var(--px) 0 var(--burgundy-dark);
+    box-shadow: inset 0 var(--px) 0 var(--burgundy-light), inset var(--px) 0 0 var(--burgundy-light), inset calc(var(--px) * -1) calc(var(--px) * -1) 0 oklch(0.34 0.11 20);
+    transition: translate 60ms steps(2);
+  }
+  .pull-button:hover .pull-button__face { background: oklch(0.46 0.14 22); }
+  .pull-button:active .pull-button__face,
+  .pull-button[data-pressed="true"] .pull-button__face { translate: 0 calc(var(--px) * 2); }
+  .pull-button:focus-visible { border-color: var(--amber); }
+  .pull-button:disabled { cursor: progress; }
+  .pull-button:disabled .pull-button__face { background: oklch(0.36 0.1 20); color: var(--gold); }
+
+  .lever-slot {
+    width: 16px;
+    background: var(--glass);
+    border: var(--px) solid var(--outline);
+    box-shadow: inset 2px 2px 0 oklch(0 0 0 / 0.6);
+  }
+  .lever-knob {
+    width: 32px; height: 32px;
+    background: var(--ink-red);
+    border: var(--px) solid var(--outline);
+    box-shadow: inset var(--px) var(--px) 0 oklch(0.65 0.16 28), inset calc(var(--px) * -1) calc(var(--px) * -1) 0 var(--burgundy-dark);
+    clip-path: var(--pixel-clip);
+    transition: translate 0.14s steps(4);
+  }
+  .lever-knob.is-down { translate: 0 120px; transition: translate 0.12s steps(3); }
+
+  .icon-button {
+    width: 36px; height: 36px;
+    display: grid; place-items: center;
+    background: var(--mahogany-dark);
+    color: var(--gold-light);
+    border: var(--px) solid var(--outline);
+    box-shadow: var(--bevel);
+    clip-path: var(--pixel-clip);
+    font-family: var(--font-display);
+    font-size: 16px;
+  }
+  .icon-button:hover { background: var(--mahogany); }
+  .icon-button[aria-pressed="true"] { background: var(--forest); }
+
+  .pixel-panel {
+    background: var(--parchment);
+    color: var(--ink);
+    border: var(--px) solid var(--outline);
+    box-shadow: inset calc(var(--px) * -1) calc(var(--px) * -1) 0 var(--parchment-dark);
+    clip-path: var(--pixel-clip);
+  }
+  .chip {
+    font-family: var(--font-display);
+    font-size: 11px;
+    padding: 4px 8px;
+    border: 2px solid var(--ink);
+    color: var(--ink);
+    background: transparent;
+  }
+  .chip:hover { background: var(--parchment-dark); }
+  .chip[aria-pressed="true"] { background: var(--forest); color: var(--parchment); border-color: var(--forest-dark); }
+
+  .sparkle {
+    position: absolute;
+    width: 8px; height: 8px;
+    background: var(--gold-light);
+    box-shadow: 0 0 0 2px var(--amber);
+    animation: sparkle 0.7s steps(7) forwards;
+  }
+
+  .anim-reel { animation: reel-roll var(--tick, 60ms) linear; }
+  .anim-land { animation: card-land 0.42s steps(7) both; }
+  .anim-letter { display: inline-block; animation: letter-drop 0.26s steps(4) both; }
+  .anim-clunk { animation: clunk 0.3s steps(5); }
+  .anim-blink { animation: blink 1.4s steps(1) infinite; }
+  .anim-stamp { animation: stamp 0.3s steps(4) both; }
+  .anim-fade { animation: fade 0.3s ease-out both; }
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 0.95; }
+  12% { opacity: 0.8; }
+  14% { opacity: 1; }
+  48% { opacity: 0.88; }
+  52% { opacity: 1; }
+  77% { opacity: 0.84; }
+  80% { opacity: 0.97; }
+}
+@keyframes streak { from { background-position: 0 0; } to { background-position: 0 12px; } }
+@keyframes rattle { 0% { translate: 0 0; } 50% { translate: 2px 2px; } }
+@keyframes reel-roll { from { translate: 0 -50%; } to { translate: 0 0; } }
+@keyframes card-land {
+  0% { translate: 0 -40px; }
+  55% { translate: 0 8px; }
+  75% { translate: 0 -4px; }
+  100% { translate: 0 0; }
+}
+@keyframes letter-drop {
+  0% { translate: 0 -14px; opacity: 0; }
+  60% { translate: 0 3px; opacity: 1; }
+  100% { translate: 0 0; opacity: 1; }
+}
+@keyframes clunk {
+  0% { translate: 0 0; }
+  25% { translate: 0 6px; }
+  50% { translate: -2px 0; }
+  75% { translate: 2px 2px; }
+  100% { translate: 0 0; }
+}
+@keyframes blink { 0%, 60% { opacity: 1; } 61%, 100% { opacity: 0.35; } }
+@keyframes stamp {
+  0% { scale: 2.2; opacity: 0; }
+  70% { scale: 0.92; opacity: 0.9; }
+  100% { scale: 1; opacity: 0.85; }
+}
+@keyframes sparkle {
+  0% { translate: 0 0; opacity: 1; scale: 1; }
+  100% { translate: var(--dx) var(--dy); opacity: 0; scale: 0.4; }
+}
+@keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .lamp-glow, .anim-blink, .drawer.is-rattling, .index-card.is-spinning::after { animation: none; }
+  .anim-land, .anim-letter, .anim-clunk, .anim-stamp, .sparkle { animation: fade 0.2s ease-out both; }
+}
